@@ -2,62 +2,71 @@
 
 Cool pi AI — a reusable AI backend and API with Telegram bot integration.
 
-## Mobile-ready update
+## Current status
 
-This project now includes a more app-friendly API contract for Android and web clients.
+This project is a backend-first AI service and not yet a full Android app. It already exposes a chat API and Telegram bot flow, which makes it a strong foundation for a mobile client.
 
-### New API features
+## Android app roadmap
 
-- `POST /api/chat` accepts an optional `chatId` and returns richer response metadata.
-- `GET /api/chat/history/:chatId` returns the saved conversation for a device/session.
-- `POST /api/chat/reset` clears a device/session conversation.
+The next improvement step is to build a polished Android interface on top of the existing API.
 
-### Example request
+### Recommended stack
 
-```json
-{
-  "chatId": 12345,
-  "message": "How are you today?",
-  "language": "en",
-  "history": [
-    { "role": "user", "content": "Hello" },
-    { "role": "assistant", "content": "Hi!" }
-  ]
-}
-```
+- Kotlin
+- Jetpack Compose
+- Material 3
+- ViewModel + StateFlow
+- Retrofit or Ktor
+- Room for local chat caching
 
-### Example response
+### Planned UI screens
 
-```json
-{
-  "success": true,
-  "reply": "Hello! I am here to help.",
-  "chatId": 12345,
-  "language": "en",
-  "historyLength": 2,
-  "timestamp": "2026-10-19T12:00:00.000Z"
-}
-```
+- Welcome / onboarding
+- AI chat screen
+- History / recent conversations
+- Settings / language preferences
+- Dark mode and accessibility screen
 
-## Suggested Android interface improvements
+### Interface improvements
 
-- Chat bubbles with modern Material 3 styling
-- New chat and session list screen
-- Language toggle (English / Hausa / Pidgin)
-- Typing indicator and loading states
-- Dark mode and accessible contrast
-- Clear conversation and history management
-- Retry and error handling for flaky network conditions
+- modern chat bubble layout
+- typed indicator and loading states
+- quick reply action chips
+- better spacing and typography
+- resizable text for accessibility
+- clear error and retry UX
+- session reset and history controls
 
-## Running locally
+### API updates needed for mobile
+
+- richer response metadata
+- chat session IDs
+- history retrieval endpoint
+- clear language preference support
+- mobile-friendly response formatting
+
+## Project direction
+
+The repo should evolve into two connected layers:
+
+1. Backend AI service (current repo)
+2. Android app client (new mobile UI layer)
+
+This keeps the AI logic centralized while delivering a better user experience on mobile.
+
+## Local run
 
 ```bash
 npm install
 npm run dev
 ```
 
-Then open the health check:
+Then check health:
 
 ```bash
 curl http://localhost:3000/api/health
 ```
+
+## Mobile-ready next step
+
+Focus on the chat experience first, then add settings, conversations, and polished interface improvements.
